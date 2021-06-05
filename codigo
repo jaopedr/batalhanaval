@@ -1,0 +1,103 @@
+def matriz(n_linhas=10,n_col=10):
+    c = []
+    for i in range(n_linhas):
+        lista = []
+        for j in range(n_col):
+            lista.append('~')
+        c.append(lista)
+    return c
+
+def imprime_matriz(matriz):
+    """Funcao que,dada uma matriz de entrada, a imprime na
+    saida padrao
+    list->None"""
+
+    for linha in matriz:
+        print("|",end=" ")
+        for elemento in linha:
+            print(elemento,end=" ")
+        print("|")
+
+from random import randint
+
+def porta_avioes(matriz):
+    direcao_navio = randint(0,1)
+    if direcao_navio  == 0:
+        coluna_navio = randint(0,9)
+        numero_arranjos = 10 - 5 + 1
+        lista_posicoes = []
+
+        for numero in list(range(numero_arranjos)):
+            posicoes = list (range(numero,numero+5))
+            lista_posicoes.append(posicoes)
+
+        posicao = lista_posicoes[randint(0,numero_arranjos-1)]
+
+        for linha in range(len(matriz)):
+            if linha in posicao:
+                matriz[linha][coluna_navio] = "P"
+
+    else:
+        linha_navio = randint(0,9)
+        numero_arranjos = 10-5+1
+        lista_posicoes=[]
+
+        for numero in list(range(numero_arranjos)):
+            posicoes=list(range(numero,numero+5))
+            lista_posicoes.append(posicoes)
+
+        posicao = lista_posicoes[randint(0,numero_arranjos-1)]
+
+        for linha in range(len(matriz)):
+            if linha == linha_navio:
+                for coluna in range(len(matriz[0])):
+                    if coluna in posicao:
+                        matriz[linha_navio][coluna] = "P"
+
+    return matriz
+
+def submarino(matriz):
+    direcao_submarino = randint(0,1)
+    if direcao_submarino == 0:
+        coluna_submarino = randint(0,9)
+        numero_arranjos = 10-2+1
+        lista_posicoes = []
+
+    for numero in list(range(numero_arranjos)):
+        posicoes = list(range(numero, numero+2))
+        lista_posicoes.append(posicoes)
+
+    posicao = lista_posicoes[randint(0,numero_arranjos-1)]
+
+    for linha in range(len(matriz)):
+        if linha in posicao:
+            matriz[linha][coluna_submarino] = "S"
+
+    else:
+        linha_submarino = randint(0,9)
+        numero_arranjos = 10-2+1
+        lista_posicoes=[]
+
+        for numero in list(range(numero_arranjos)):
+            posicoes=list(range(numero, numero+2))
+            lista_posicoes.append(posicoes)
+
+        posicao = lista_posicoes[randint(0,numero_arranjos-1)]
+
+        for linha in range(len(matriz)):
+            if linha == linha_submarino:
+                for coluna in range(len(matriz[0])):
+                    if coluna in posicao:
+                        matriz[linha_submarino][coluna] = "S"
+
+    return matriz
+        
+
+def main():
+    tabuleiro1 = matriz(n_linhas=10,n_col=10)
+    tabuleiro1 = porta_avioes(tabuleiro1)
+    tabuleiro1 = submarino(tabuleiro1)
+    imprime_matriz(tabuleiro1)
+    
+   
+    
